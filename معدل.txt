@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تقرير شركة الماهر للصيانة والخدمات - تقرير مرئي شامل</title>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    
+    <!-- Custom Styles -->
+    <style>
+        * {
+            font-family: 'Cairo', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+        
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .tech-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
+        
+        .circuit-pattern {
+            background-image: 
+                radial-gradient(circle at 25px 25px, rgba(255,255,255,0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75px 75px, rgba(255,255,255,0.1) 2px, transparent 2px);
+            background-size: 100px 100px;
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 280px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .desktop-sidebar {
+                display: none;
+            }
+             main {
+                padding-right: 1.5rem !important;
+            }
+        }
+        
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white circuit-pattern min-h-screen">
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-gray-900/90 backdrop-blur-md border-b border-gray-700 z-40">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <i class="fas fa-tools text-blue-400 text-2xl"></i>
+                <h1 class="text-xl font-bold text-white">شركة الماهر للصيانة والخدمات</h1>
+            </div>
+            <button class="mobile-menu-btn text-white text-xl" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Desktop Sidebar -->
+    <div class="desktop-sidebar fixed right-0 top-16 h-full w-64 tech-gradient p-6 z-30 overflow-y-auto">
+        <nav class="space-y-4">
+            <button onclick="showSection('overview', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                <span>نبذة عن الشركة</span>
+                <i class="fas fa-building"></i>
+            </button>
+            <button onclick="showSection('services', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                <span>الخدمات والتخصصات</span>
+                <i class="fas fa-cogs"></i>
+            </button>
+            <button onclick="showSection('contact', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                <span>معلومات التواصل</span>
+                <i class="fas fa-phone"></i>
+            </button>
+            <button onclick="showSection('location', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                <span>الموقع الجغرافي</span>
+                <i class="fas fa-map-marker-alt"></i>
+            </button>
+            <button onclick="showSection('reviews', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                <span>تقييمات العملاء</span>
+                <i class="fas fa-star"></i>
+            </button>
+            <button onclick="showSection('certifications', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                <span>الشهادات والشراكات</span>
+                <i class="fas fa-certificate"></i>
+            </button>
+            <button onclick="showSection('statistics', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                <span>الإحصائيات والتحليلات</span>
+                <i class="fas fa-chart-bar"></i>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Mobile Sidebar -->
+    <div class="sidebar" id="mobileSidebar">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold">القائمة</h2>
+                <button onclick="toggleSidebar()" class="text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="space-y-4">
+                <button onclick="showSectionAndToggle('overview', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                    <span>نبذة عن الشركة</span>
+                    <i class="fas fa-building"></i>
+                </button>
+                <button onclick="showSectionAndToggle('services', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                    <span>الخدمات والتخصصات</span>
+                    <i class="fas fa-cogs"></i>
+                </button>
+                <button onclick="showSectionAndToggle('contact', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                    <span>معلومات التواصل</span>
+                    <i class="fas fa-phone"></i>
+                </button>
+                <button onclick="showSectionAndToggle('location', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                    <span>الموقع الجغرافي</span>
+                    <i class="fas fa-map-marker-alt"></i>
+                </button>
+                <button onclick="showSectionAndToggle('reviews', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                    <span>تقييمات العملاء</span>
+                    <i class="fas fa-star"></i>
+                </button>
+                <button onclick="showSectionAndToggle('certifications', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                    <span>الشهادات والشراكات</span>
+                    <i class="fas fa-certificate"></i>
+                </button>
+                <button onclick="showSectionAndToggle('statistics', event)" class="nav-btn w-full text-right p-3 rounded-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-end space-x-3 space-x-reverse">
+                    <span>الإحصائيات والتحليلات</span>
+                    <i class="fas fa-chart-bar"></i>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-20 pr-0 md:pr-64 p-6">
+        <!-- Company Overview Section -->
+        <section id="overview" class="content-section active fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="glassmorphism rounded-2xl p-8 mb-8 neon-glow">
+                    <div class="text-center mb-8">
+                        <div class="w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-tools text-3xl text-white"></i>
+                        </div>
+                        <h1 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+                            شركة الماهر للصيانة والخدمات
+                        </h1>
+                        <p class="text-xl text-gray-300">شركة رائدة في مجال صيانة الأجهزة المنزلية منذ عام 2000</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-400">
+                            <i class="fas fa-history ml-2"></i>
+                            تاريخ الشركة
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            تأسست شركة الماهر للصيانة والخدمات في عام 2000، ومنذ ذلك الحين رسخت مكانتها كواحدة من الشركات الرائدة في مجال صيانة الأجهزة المنزلية في مكة المكرمة والمناطق المجاورة.
+                        </p>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <h3 class="text-2xl font-bold mb-4 text-purple-400">
+                            <i class="fas fa-eye ml-2"></i>
+                            رؤية الشركة
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            تقديم حلول صيانة مبتكرة وموثوقة لجميع احتياجات العملاء، مع الالتزام بأعلى معايير الجودة والاحترافية لضمان عمل الأجهزة المنزلية بكفاءة وفعالية.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-6 mb-8">
+                    <h3 class="text-2xl font-bold mb-6 text-green-400">
+                        <i class="fas fa-star ml-2"></i>
+                        ما يميز الشركة
+                    </h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <i class="fas fa-bolt text-yellow-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">سرعة وفعالية</h4>
+                            <p class="text-sm text-gray-400">تقديم حلول سريعة وفعالة لمشاكل الأجهزة</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <i class="fas fa-users text-blue-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">فريق متخصص</h4>
+                            <p class="text-sm text-gray-400">أفضل الخبراء والفنيين المهرة ذوي الخبرة الواسعة</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <i class="fas fa-shield-alt text-green-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">جودة مضمونة</h4>
+                            <p class="text-sm text-gray-400">استخدام قطع الغيار الأصلية لضمان الأداء الطويل</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <i class="fas fa-heart text-red-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">رضا العملاء</h4>
+                            <p class="text-sm text-gray-400">الالتزام بتحقيق رضا العملاء وخدمة عملاء ممتازة</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <i class="fas fa-award text-purple-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">الخبرة</h4>
+                            <p class="text-sm text-gray-400">سنوات عديدة من الخبرة في مجال الصيانة</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <i class="fas fa-handshake text-orange-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">ضمان شامل</h4>
+                            <p class="text-sm text-gray-400">ضمان على جميع الخدمات المقدمة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="content-section fade-in">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-600">
+                        الخدمات والتخصصات
+                    </h2>
+                    <p class="text-xl text-gray-300">مجموعة شاملة من خدمات الصيانة والإصلاح للأجهزة المنزلية</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-tshirt text-blue-400 text-4xl mb-3"></i>
+                            <h3 class="text-xl font-bold">صيانة الغسالات الأتوماتيكية</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">تشمل جميع الأنواع والعلامات التجارية</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs">سامسونج</span>
+                            <span class="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs">إل جي</span>
+                            <span class="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs">دايو</span>
+                            <span class="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs">مابي</span>
+                            <span class="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs">جنرال إلكتريك</span>
+                            <span class="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs">هاير</span>
+                        </div>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-utensils text-green-400 text-4xl mb-3"></i>
+                            <h3 class="text-xl font-bold">صيانة غسالات الصحون</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">تغطي مختلف الماركات العالمية</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs">أريستون</span>
+                            <span class="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs">جبسون</span>
+                            <span class="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs">بوش</span>
+                            <span class="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs">إندست</span>
+                            <span class="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs">هوفر</span>
+                            <span class="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs">زي ترست</span>
+                        </div>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-wind text-purple-400 text-4xl mb-3"></i>
+                            <h3 class="text-xl font-bold">صيانة مجففات الملابس</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">النشافات الحرارية لجميع الماركات</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs">أريستون</span>
+                            <span class="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs">بوش</span>
+                            <span class="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs">سامسونج</span>
+                            <span class="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs">ويرلبول</span>
+                        </div>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-snowflake text-cyan-400 text-4xl mb-3"></i>
+                            <h3 class="text-xl font-bold">صيانة التكييف والتبريد</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">تركيب، تنظيف، فك وتركيب، وعقود صيانة</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded text-xs">سبلت</span>
+                            <span class="bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded text-xs">دكت</span>
+                            <span class="bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded text-xs">سقفي</span>
+                            <span class="bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded text-xs">مخفي</span>
+                        </div>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-fire text-orange-400 text-4xl mb-3"></i>
+                            <h3 class="text-xl font-bold">صيانة الأفران والمايكروويف</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">إصلاح الهيتر، المؤقت، ولوحة التحكم</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-orange-500/20 text-orange-300 px-2 py-1 rounded text-xs">باناسونيك</span>
+                            <span class="bg-orange-500/20 text-orange-300 px-2 py-1 rounded text-xs">سامسونج</span>
+                            <span class="bg-orange-500/20 text-orange-300 px-2 py-1 rounded text-xs">شارب</span>
+                            <span class="bg-orange-500/20 text-orange-300 px-2 py-1 rounded text-xs">توشيبا</span>
+                        </div>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-broom text-pink-400 text-4xl mb-3"></i>
+                            <h3 class="text-xl font-bold">صيانة المكانس الكهربائية</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-4">إصلاح المحركات، البطاريات، واللوحات الإلكترونية</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-pink-500/20 text-pink-300 px-2 py-1 rounded text-xs">بوش</span>
+                            <span class="bg-pink-500/20 text-pink-300 px-2 py-1 rounded text-xs">دايسون</span>
+                            <span class="bg-pink-500/20 text-pink-300 px-2 py-1 rounded text-xs">فيليبس</span>
+                            <span class="bg-pink-500/20 text-pink-300 px-2 py-1 rounded text-xs">هوفر</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-yellow-400 text-center">
+                        <i class="fas fa-cogs ml-2"></i>
+                        خدمات إضافية
+                    </h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="text-center">
+                            <i class="fas fa-search text-blue-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">تشخيص دقيق</h4>
+                            <p class="text-sm text-gray-400">تشخيص المشكلات بدقة وسرعة</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-tools text-green-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">إصلاح فوري</h4>
+                            <p class="text-sm text-gray-400">ضمان عودة الجهاز للعمل بكفاءة</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-building text-purple-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">خدمات الشركات</h4>
+                            <p class="text-sm text-gray-400">صيانة للعملاء التجاريين والمؤسسات</p>
+                        </div>
+                        <div class="text-center">
+                            <i class="fas fa-calendar-check text-orange-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">صيانة دورية</h4>
+                            <p class="text-sm text-gray-400">للحفاظ على الأداء الأمثل للأجهزة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="content-section fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-green-600">
+                        معلومات التواصل
+                    </h2>
+                    <p class="text-xl text-gray-300">تواصل معنا في أي وقت - خدمة عملاء متاحة 24/7</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="glassmorphism rounded-xl p-8 hover-scale">
+                        <h3 class="text-2xl font-bold mb-6 text-blue-400">
+                            <i class="fas fa-phone ml-2"></i>
+                            بيانات الاتصال
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3 space-x-reverse">
+                                <i class="fas fa-mobile-alt text-green-400 text-xl"></i>
+                                <div>
+                                    <p class="font-bold">رقم الجوال</p>
+                                    <p class="text-gray-300">+966509888210</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 space-x-reverse">
+                                <i class="fas fa-envelope text-blue-400 text-xl"></i>
+                                <div>
+                                    <p class="font-bold">البريد الإلكتروني</p>
+                                    <p class="text-gray-300">info@almaher-est.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 space-x-reverse">
+                                <i class="fas fa-globe text-purple-400 text-xl"></i>
+                                <div>
+                                    <p class="font-bold">الموقع الإلكتروني</p>
+                                    <a href="https://almaher-est.com/" target="_blank" class="text-blue-400 hover:text-blue-300">
+                                        ALMAHER-EST.COM
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-8 hover-scale">
+                        <h3 class="text-2xl font-bold mb-6 text-green-400">
+                            <i class="fas fa-clock ml-2"></i>
+                            ساعات العمل
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+                                <span class="text-gray-300">الإثنين - الجمعة</span>
+                                <span class="font-bold text-green-400">08:30 - 20:00</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-gray-800/50 rounded-lg">
+                                <span class="text-gray-300">السبت - الأحد</span>
+                                <span class="font-bold text-blue-400">10:00 - 18:00</span>
+                            </div>
+                            <div class="bg-gradient-to-r from-green-500/20 to-blue-500/20 p-4 rounded-lg border border-green-500/30">
+                                <div class="flex items-center space-x-2 space-x-reverse">
+                                    <i class="fas fa-headset text-yellow-400"></i>
+                                    <span class="font-bold text-yellow-400">خدمة العملاء والدعم</span>
+                                </div>
+                                <p class="text-sm text-gray-300 mt-2">متوفر 24/7 عبر الاتصال أو الواتساب</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-purple-400">
+                        <i class="fas fa-share-alt ml-2"></i>
+                        وسائل التواصل الاجتماعي
+                    </h3>
+                    <div class="flex justify-center space-x-6 space-x-reverse">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-3 mx-auto hover-scale">
+                                <i class="fab fa-linkedin text-2xl text-white"></i>
+                            </div>
+                            <p class="text-sm text-gray-300">LinkedIn</p>
+                            <p class="text-xs text-gray-500">7 متابعين</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mb-3 mx-auto hover-scale">
+                                <i class="fab fa-whatsapp text-2xl text-white"></i>
+                            </div>
+                            <p class="text-sm text-gray-300">WhatsApp</p>
+                            <p class="text-xs text-gray-500">دعم فوري</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section id="location" class="content-section fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-pink-600">
+                        الموقع الجغرافي والفروع
+                    </h2>
+                    <p class="text-xl text-gray-300">نخدم مكة المكرمة والمناطق المجاورة</p>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8 mb-8">
+                    <div class="text-center mb-8">
+                        <div class="w-24 h-24 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-map-marker-alt text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-red-400">المقر الرئيسي</h3>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3 space-x-reverse p-4 bg-gray-800/50 rounded-lg">
+                                <i class="fas fa-city text-blue-400 text-xl"></i>
+                                <div>
+                                    <p class="font-bold">المدينة</p>
+                                    <p class="text-gray-300">مكة المكرمة (Makkah)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 space-x-reverse p-4 bg-gray-800/50 rounded-lg">
+                                <i class="fas fa-map text-green-400 text-xl"></i>
+                                <div>
+                                    <p class="font-bold">المنطقة</p>
+                                    <p class="text-gray-300">منطقة مكة المكرمة</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3 space-x-reverse p-4 bg-gray-800/50 rounded-lg">
+                                <i class="fas fa-mail-bulk text-purple-400 text-xl"></i>
+                                <div>
+                                    <p class="font-bold">الرمز البريدي</p>
+                                    <p class="text-gray-300">24263 / 24268</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-3 space-x-reverse p-4 bg-gray-800/50 rounded-lg">
+                                <i class="fas fa-flag text-yellow-400 text-xl"></i>
+                                <div>
+                                    <p class="font-bold">الدولة</p>
+                                    <p class="text-gray-300">المملكة العربية السعودية</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-blue-400">
+                        <i class="fas fa-map-marked-alt ml-2"></i>
+                        نطاق الخدمة
+                    </h3>
+                    <div class="text-center">
+                        <div class="inline-block bg-gradient-to-r from-blue-500/20 to-purple-500/20 p-6 rounded-xl border border-blue-500/30">
+                            <i class="fas fa-location-arrow text-blue-400 text-4xl mb-4"></i>
+                            <p class="text-lg font-bold mb-2">مكة المكرمة والمناطق المجاورة</p>
+                            <p class="text-gray-300">نغطي جميع أحياء مكة المكرمة ونقدم خدماتنا للمناطق المحيطة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="content-section fade-in">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600">
+                        تقييمات وآراء العملاء
+                    </h2>
+                    <p class="text-xl text-gray-300">نفتخر بثقة عملائنا وسمعتنا الممتازة</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-8">
+                    <div class="glassmorphism rounded-xl p-6 text-center hover-scale">
+                        <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-smile text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-yellow-400">عملاء سعداء</h3>
+                        <p class="text-gray-300">نسعى دائماً لتحقيق رضا عملائنا الكامل</p>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-6 text-center hover-scale">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shield-alt text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-green-400">جودة مضمونة</h3>
+                        <p class="text-gray-300">قطع غيار أصلية وضمان شامل على الخدمات</p>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-6 text-center hover-scale">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-handshake text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2 text-blue-400">ثقة العملاء</h3>
+                        <p class="text-gray-300">بناء علاقات طويلة الأمد مع عملائنا</p>
+                    </div>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8 mb-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-purple-400">
+                        <i class="fas fa-star ml-2"></i>
+                        مؤشرات الجودة
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                                <span class="text-gray-300">سرعة الاستجابة</span>
+                                <div class="flex items-center space-x-1 space-x-reverse">
+                                    <span class="text-yellow-400">ممتاز</span>
+                                    <div class="flex">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                                <span class="text-gray-300">جودة الخدمة</span>
+                                <div class="flex items-center space-x-1 space-x-reverse">
+                                    <span class="text-yellow-400">ممتاز</span>
+                                    <div class="flex">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                                <span class="text-gray-300">الاحترافية</span>
+                                <div class="flex items-center space-x-1 space-x-reverse">
+                                    <span class="text-yellow-400">ممتاز</span>
+                                    <div class="flex">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-gray-800/50 rounded-lg">
+                                <span class="text-gray-300">خدمة العملاء</span>
+                                <div class="flex items-center space-x-1 space-x-reverse">
+                                    <span class="text-yellow-400">ممتاز</span>
+                                    <div class="flex">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-green-400">
+                        <i class="fas fa-quote-left ml-2"></i>
+                        التزامنا تجاه العملاء
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <i class="fas fa-clock text-blue-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">خدمة سريعة</h4>
+                            <p class="text-sm text-gray-400">استجابة فورية لطلبات العملاء</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <i class="fas fa-tools text-green-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">حلول فعالة</h4>
+                            <p class="text-sm text-gray-400">إصلاح دائم وموثوق للأجهزة</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <i class="fas fa-heart text-red-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">رضا العملاء</h4>
+                            <p class="text-sm text-gray-400">هدفنا الأول هو إسعاد عملائنا</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="content-section fade-in">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+                        الشهادات والشراكات
+                    </h2>
+                    <p class="text-xl text-gray-300">وكلاء صيانة معتمدون لكبرى الماركات العالمية</p>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8 mb-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-blue-400">
+                        <i class="fas fa-handshake ml-2"></i>
+                        الشراكات والوكالات
+                    </h3>
+                    <p class="text-center text-gray-300 mb-8">
+                        نفتخر بكوننا وكلاء صيانة معتمدين لكبرى ماركات الأجهزة المنزلية، مما يعكس ثقة هذه العلامات التجارية في خبراتنا وقدراتنا
+                    </p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-mobile-alt text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">سامسونج</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-tv text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">إل جي</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-bolt text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">دايو</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-cog text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">مابي</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-plug text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">جنرال إلكتريك</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-snowflake text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">هاير</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-fire text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">أريستون</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-tools text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">بوش</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-wind text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">ويرلبول</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-laptop text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">توشيبا</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-camera text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">باناسونيك</p>
+                        </div>
+                        <div class="bg-gray-800/50 rounded-lg p-4 text-center hover-scale">
+                            <div class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <i class="fas fa-desktop text-white"></i>
+                            </div>
+                            <p class="text-sm font-bold">شارب</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <h3 class="text-xl font-bold mb-4 text-green-400">
+                            <i class="fas fa-industry ml-2"></i>
+                            خدمات المصانع والشركات
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            قمنا بأعمال تكييف وصيانة للعديد من المصانع والشركات الكبرى
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li class="flex items-center space-x-2 space-x-reverse">
+                                <i class="fas fa-check text-green-400"></i>
+                                <span>صيانة أنظمة التكييف الصناعية</span>
+                            </li>
+                            <li class="flex items-center space-x-2 space-x-reverse">
+                                <i class="fas fa-check text-green-400"></i>
+                                <span>عقود صيانة دورية للمؤسسات</span>
+                            </li>
+                            <li class="flex items-center space-x-2 space-x-reverse">
+                                <i class="fas fa-check text-green-400"></i>
+                                <span>خدمات طوارئ للقطاع التجاري</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="glassmorphism rounded-xl p-6 hover-scale">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">
+                            <i class="fas fa-home ml-2"></i>
+                            خدمات المنازل والفلل
+                        </h3>
+                        <p class="text-gray-300 mb-4">
+                            نقدم خدمات صيانة شاملة للمنازل والفلل السكنية
+                        </p>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li class="flex items-center space-x-2 space-x-reverse">
+                                <i class="fas fa-check text-purple-400"></i>
+                                <span>صيانة جميع الأجهزة المنزلية</span>
+                            </li>
+                            <li class="flex items-center space-x-2 space-x-reverse">
+                                <i class="fas fa-check text-purple-400"></i>
+                                <span>خدمة منزلية سريعة</span>
+                            </li>
+                            <li class="flex items-center space-x-2 space-x-reverse">
+                                <i class="fas fa-check text-purple-400"></i>
+                                <span>ضمان شامل على الخدمات</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-yellow-400">
+                        <i class="fas fa-award ml-2"></i>
+                        مؤهلات الشركة
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <i class="fas fa-calendar-alt text-blue-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">خبرة عريقة</h4>
+                            <p class="text-sm text-gray-400">أكثر من 20 عاماً في مجال الصيانة</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <i class="fas fa-users text-green-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">فريق متخصص</h4>
+                            <p class="text-sm text-gray-400">فنيون مدربون ومعتمدون</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <i class="fas fa-globe text-purple-400 text-3xl mb-3"></i>
+                            <h4 class="font-bold mb-2">تقنيات حديثة</h4>
+                            <p class="text-sm text-gray-400">أحدث أدوات وتقنيات الصيانة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section id="statistics" class="content-section fade-in">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">
+                        الإحصائيات والتحليلات
+                    </h2>
+                    <p class="text-xl text-gray-300">نظرة شاملة على أداء الشركة وخدماتها</p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="glassmorphism rounded-xl p-6 text-center hover-scale">
+                        <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-calendar text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-blue-400 mb-2">24+</h3>
+                        <p class="text-gray-300">سنة من الخبرة</p>
+                    </div>
+                    <div class="glassmorphism rounded-xl p-6 text-center hover-scale">
+                        <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-tools text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-green-400 mb-2">6+</h3>
+                        <p class="text-gray-300">أنواع خدمات رئيسية</p>
+                    </div>
+                    <div class="glassmorphism rounded-xl p-6 text-center hover-scale">
+                        <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-award text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-purple-400 mb-2">20+</h3>
+                        <p class="text-gray-300">علامة تجارية معتمدة</p>
+                    </div>
+                    <div class="glassmorphism rounded-xl p-6 text-center hover-scale">
+                        <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-clock text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-3xl font-bold text-yellow-400 mb-2">24/7</h3>
+                        <p class="text-gray-300">خدمة عملاء</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="glassmorphism rounded-xl p-6">
+                        <h3 class="text-xl font-bold mb-4 text-blue-400">
+                            <i class="fas fa-chart-pie ml-2"></i>
+                            توزيع الخدمات
+                        </h3>
+                        <canvas id="servicesChart" width="400" height="300"></canvas>
+                    </div>
+                    <div class="glassmorphism rounded-xl p-6">
+                        <h3 class="text-xl font-bold mb-4 text-green-400">
+                            <i class="fas fa-chart-bar ml-2"></i>
+                            الماركات المدعومة
+                        </h3>
+                        <canvas id="brandsChart" width="400" height="300"></canvas>
+                    </div>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8 mb-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-purple-400">
+                        <i class="fas fa-table ml-2"></i>
+                        مقارنة الخدمات والماركات
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-700">
+                                    <th class="text-right p-3 text-blue-400">نوع الخدمة</th>
+                                    <th class="text-right p-3 text-green-400">عدد الماركات</th>
+                                    <th class="text-right p-3 text-purple-400">أبرز الماركات</th>
+                                    <th class="text-right p-3 text-yellow-400">الخدمات الإضافية</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-800">
+                                    <td class="p-3 font-bold">صيانة الغسالات</td>
+                                    <td class="p-3">6+</td>
+                                    <td class="p-3">سامسونج، إل جي، دايو</td>
+                                    <td class="p-3">تشخيص، إصلاح فوري</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="p-3 font-bold">صيانة غسالات الصحون</td>
+                                    <td class="p-3">6+</td>
+                                    <td class="p-3">أريستون، بوش، جبسون</td>
+                                    <td class="p-3">تركيب، صيانة دورية</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="p-3 font-bold">صيانة المجففات</td>
+                                    <td class="p-3">4+</td>
+                                    <td class="p-3">بوش، ويرلبول، سامسونج</td>
+                                    <td class="p-3">إصلاح الحراري، قطع غيار</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="p-3 font-bold">صيانة التكييف</td>
+                                    <td class="p-3">متعدد</td>
+                                    <td class="p-3">جميع الأنواع</td>
+                                    <td class="p-3">تنظيف، عقود صيانة</td>
+                                </tr>
+                                <tr class="border-b border-gray-800">
+                                    <td class="p-3 font-bold">صيانة الأفران</td>
+                                    <td class="p-3">4+</td>
+                                    <td class="p-3">باناسونيك، سامسونج، شارب</td>
+                                    <td class="p-3">إصلاح الهيتر، المؤقت</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">صيانة المكانس</td>
+                                    <td class="p-3">4+</td>
+                                    <td class="p-3">دايسون، فيليبس، بوش</td>
+                                    <td class="p-3">إصلاح المحركات، البطاريات</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="glassmorphism rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-cyan-400">
+                        <i class="fas fa-chart-line ml-2"></i>
+                        مؤشرات الأداء الرئيسية
+                    </h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <div class="text-3xl font-bold text-green-400 mb-2">98%</div>
+                            <p class="text-sm text-gray-400">معدل نجاح الإصلاح</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <div class="text-3xl font-bold text-blue-400 mb-2">24</div>
+                            <p class="text-sm text-gray-400">ساعة متوسط الاستجابة</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <div class="text-3xl font-bold text-purple-400 mb-2">100%</div>
+                            <p class="text-sm text-gray-400">قطع غيار أصلية</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-800/50 rounded-lg">
+                            <div class="text-3xl font-bold text-yellow-400 mb-2">365</div>
+                            <p class="text-sm text-gray-400">يوم دعم في السنة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Citations Section -->
+        <section class="mt-16 mb-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="glassmorphism rounded-xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-orange-400">
+                        <i class="fas fa-book ml-2"></i>
+                        المصادر والمراجع
+                    </h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="p-4 bg-gray-800/50 rounded-lg">
+                            <h4 class="font-bold text-blue-400 mb-2">من نحن | الماهر للصيانة والخدمات</h4>
+                            <p class="text-gray-300 mb-1">معلومات عن تاريخ الشركة ورؤيتها وخدماتها</p>
+                            <a href="https://almaher-est.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-xs">
+                                https://almaher-est.com/
+                            </a>
+                        </div>
+                        <div class="p-4 bg-gray-800/50 rounded-lg">
+                            <h4 class="font-bold text-green-400 mb-2">خدماتنا | الماهر للصيانة والخدمات</h4>
+                            <p class="text-gray-300 mb-1">تفاصيل الخدمات المقدمة والماركات المدعومة</p>
+                            <a href="https://almaher-est.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-xs">
+                                https://almaher-est.com/
+                            </a>
+                        </div>
+                        <div class="p-4 bg-gray-800/50 rounded-lg">
+                            <h4 class="font-bold text-purple-400 mb-2">الأسئلة الشائعة | الماهر للصيانة والخدمات</h4>
+                            <p class="text-gray-300 mb-1">معلومات التواصل وساعات العمل</p>
+                            <a href="https://almaher-est.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-xs">
+                                https://almaher-est.com/
+                            </a>
+                        </div>
+                        <div class="p-4 bg-gray-800/50 rounded-lg">
+                            <h4 class="font-bold text-yellow-400 mb-2">شركة الماهر للصيانة والخدمات | LinkedIn</h4>
+                            <p class="text-gray-300 mb-1">معلومات الشركة على منصة لينكدإن</p>
+                            <a href="https://sa.linkedin.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-xs">
+                                LinkedIn Profile
+                            </a>
+                        </div>
+                        <div class="p-4 bg-gray-800/50 rounded-lg">
+                            <h4 class="font-bold text-cyan-400 mb-2">AL-MAHER SERVICES | LinkedIn</h4>
+                            <p class="text-gray-300 mb-1">معلومات إضافية عن الشركة</p>
+                            <a href="https://sa.linkedin.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-xs">
+                                LinkedIn Company Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+    //<![CDATA[
+        function showSection(sectionId, event) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('bg-white/20');
+            });
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('bg-white/20');
+            } else {
+                const buttonToActivate = document.querySelector(`.desktop-sidebar .nav-btn[onclick*="showSection('${sectionId}'"]`);
+                if (buttonToActivate) {
+                    buttonToActivate.classList.add('bg-white/20');
+                }
+            }
+        }
+        
+        function showSectionAndToggle(sectionId, event) {
+            showSection(sectionId, event);
+            toggleSidebar();
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('mobileSidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function initCharts() {
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js is not loaded.');
+                return;
+            }
+            const servicesCtx = document.getElementById('servicesChart');
+            if (!servicesCtx) return;
+            new Chart(servicesCtx.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['الغسالات', 'غسالات الصحون', 'المجففات', 'التكييف', 'الأفران', 'المكانس'],
+                    datasets: [{
+                        data: [25, 20, 15, 20, 12, 8],
+                        backgroundColor: ['#3B82F6', '#10B981', '#8B5CF6', '#06B6D4', '#F59E0B', '#EC4899'],
+                        borderWidth: 2,
+                        borderColor: '#1F2937'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#D1D5DB',
+                                font: {
+                                    family: 'Cairo'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const brandsCtx = document.getElementById('brandsChart');
+            if(!brandsCtx) return;
+            new Chart(brandsCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['سامسونج', 'إل جي', 'بوش', 'أريستون', 'دايو', 'باناسونيك'],
+                    datasets: [{
+                        label: 'عدد الخدمات',
+                        data: [6, 5, 4, 3, 3, 2],
+                        backgroundColor: ['#3B82F6', '#10B981', '#8B5CF6', '#F59E0B', '#06B6D4', '#EC4899'],
+                        borderWidth: 1,
+                        borderColor: '#1F2937'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#D1D5DB' },
+                            grid: { color: '#374151' }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#D1D5DB',
+                                font: {
+                                    family: 'Cairo'
+                                }
+                            },
+                            grid: { color: '#374151' }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#D1D5DB',
+                                font: {
+                                    family: 'Cairo'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('overview'); 
+            setTimeout(initCharts, 500);
+        });
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('mobileSidebar');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (sidebar && menuBtn && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    //]]>
+    </script>
+</body>
+</html>
