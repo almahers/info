@@ -192,6 +192,22 @@
                 margin-right: 0;
             }
         }
+
+        /* Social icons responsive layout */
+        .social-icons-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .social-icons-row {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                justify-items: center;
+            }
+        }
     </style>
     <link rel="icon" type="image/png" href="https://almaher-est.com/wp-content/uploads/2024/11/%D8%B4%D8%B9%D8%A7%D8%B1-%D8%A7%D9%84%D9%85%D8%A7%D9%87%D8%B1-%D9%84%D9%84%D8%B5%D9%8A%D8%A7%D9%86%D8%A9-%D9%88%D8%A7%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA.png">
 </head>
@@ -569,7 +585,7 @@
                         <i class="fas fa-share-alt ml-2"></i>
                         وسائل التواصل الاجتماعي
                     </h3>
-                    <div class="flex justify-center space-x-6 space-x-reverse">
+                    <div class="social-icons-row">
                         <!-- LinkedIn -->
                         <div class="text-center">
                             <a href="https://www.linkedin.com/in/almaherser/" target="_blank">
