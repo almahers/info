@@ -1,0 +1,197 @@
+* {
+    font-family: 'Cairo', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.glassmorphism {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tech-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.neon-glow {
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+.circuit-pattern {
+    background-image: 
+        radial-gradient(circle at 25px 25px, rgba(255,255,255,0.1) 2px, transparent 2px),
+        radial-gradient(circle at 75px 75px, rgba(255,255,255,0.1) 2px, transparent 2px);
+    background-size: 100px 100px;
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 280px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+.mobile-menu-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .desktop-sidebar {
+        display: none;
+    }
+    
+    main {
+        padding-right: 1.5rem !important;
+        margin-right: 0 !important;
+    }
+}
+
+.content-section {
+    display: none;
+    direction: rtl;
+    text-align: right;
+}
+
+.content-section.active {
+    display: block;
+    direction: rtl;
+    text-align: right;
+}
+
+/* For tables and charts, force ltr for better layout */
+.content-section table,
+.content-section canvas,
+.content-section .ltr,
+.content-section .statistics-charts {
+    direction: ltr !important;
+    text-align: left !important;
+}
+
+/* Sidebar nav buttons */
+/* (No forced direction or text-align for sidebar nav buttons) */
+.sidebar .nav-btn,
+.desktop-sidebar .nav-btn {
+    direction: rtl;
+    text-align: right;
+}
+
+.desktop-sidebar {
+    position: fixed;
+    right: 0;
+    left: auto;
+    top: 4rem;
+    height: 100vh;
+    width: 16rem;
+    padding: 1.5rem;
+    z-index: 30;
+    overflow-y: auto;
+}
+
+main {
+    padding-right: 5rem;
+    margin-right: 2rem;
+}
+
+.sidebar {
+    right: 0;
+    left: auto;
+}
+
+.content-section h1,
+.content-section h2,
+.content-section h3,
+.content-section h4,
+.content-section h5,
+.content-section h6 {
+    text-align: center;
+    direction: rtl;
+}
+
+/* Comparison table in statistics section: right-to-left */
+#statistics table {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+.desktop-sidebar nav {
+    direction: rtl;
+    text-align: right;
+}
+
+.desktop-sidebar .nav-btn {
+    direction: rtl;
+    text-align: right;
+    flex-direction: row-reverse !important;
+}
+
+.desktop-sidebar .nav-btn,
+.sidebar .nav-btn {
+    text-align: center;
+    flex-direction: row !important;
+    justify-content: center;
+}
+
+.desktop-sidebar .nav-btn i,
+.sidebar .nav-btn i {
+    margin-left: 0.75rem;
+    margin-right: 0;
+}
+
+@media (max-width: 768px) {
+    .desktop-sidebar .nav-btn,
+    .sidebar .nav-btn {
+        text-align: center;
+        flex-direction: row !important;
+        justify-content: center;
+    }
+    .desktop-sidebar .nav-btn i,
+    .sidebar .nav-btn i {
+        margin-left: 0.75rem;
+        margin-right: 0;
+    }
+}
+
+/* Social icons responsive layout */
+.social-icons-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+@media (max-width: 768px) {
+    .social-icons-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        justify-items: center;
+    }
+}
