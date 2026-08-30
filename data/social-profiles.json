@@ -1,0 +1,11 @@
+[
+  { "id": "whatsapp", "name": "واتساب", "handle": "+966509888210", "url": "https://wa.me/966509888210", "icon": "whatsapp", "same_as": false },
+  { "id": "facebook", "name": "فيسبوك", "handle": "almahermakkah", "url": "https://www.facebook.com/almahermakkah/", "icon": "facebook", "same_as": true },
+  { "id": "x", "name": "إكس", "handle": "@AlmaherService", "url": "https://www.x.com/AlmaherService", "icon": "x", "same_as": true },
+  { "id": "instagram", "name": "إنستغرام", "handle": "@almaherser", "url": "https://www.instagram.com/almaherser", "icon": "instagram", "same_as": true },
+  { "id": "tiktok", "name": "تيك توك", "handle": "@almaherser", "url": "https://www.tiktok.com/@almaherser", "icon": "tiktok", "same_as": true },
+  { "id": "youtube", "name": "يوتيوب", "handle": "@almaherser", "url": "https://www.youtube.com/@almaherser", "icon": "youtube", "same_as": true },
+  { "id": "linkedin", "name": "لينكدإن", "handle": "almaherser", "url": "https://www.linkedin.com/in/almaherser/", "icon": "linkedin", "same_as": true },
+  { "id": "pinterest", "name": "بينترست", "handle": "almaherser", "url": "https://www.pinterest.com/almaherser/", "icon": "pinterest", "same_as": true },
+  { "id": "snapchat", "name": "سناب شات", "handle": "@almaher_service", "url": "https://www.snapchat.com/@almaher_service", "icon": "snapchat", "same_as": true }
+]

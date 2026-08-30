@@ -1,0 +1,18 @@
+{
+  "name_ar": "الماهر للصيانة",
+  "name_en": "Almaher Maintenance",
+  "website": "https://almaher-est.com",
+  "phone": "+966509888210",
+  "country": "SA",
+  "country_name_ar": "المملكة العربية السعودية",
+  "city": "مكة المكرمة",
+  "service_area": "مكة المكرمة",
+  "language": "ar",
+  "direction": "rtl",
+  "canonical_url": "https://almahers.github.io/info/",
+  "service_categories": [
+    { "id": "washing-machines", "name": "الغسالات الأوتوماتيكية", "icon": "washer", "accent": "blue" },
+    { "id": "dishwashers", "name": "غسالات الصحون", "icon": "dishwasher", "accent": "violet" },
+    { "id": "dryers", "name": "مجففات الملابس", "icon": "dryer", "accent": "cyan" }
+  ]
+}
